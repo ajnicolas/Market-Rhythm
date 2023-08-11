@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ title }}</title>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+    <h2>Backtesting Results for longs and shorts
+      <a href="http://localhost:5000/settings">   Settings</a>
+    </h2>
+    
+    <h4>Results from: {{ start }} - {{ end }}, using {{ strat }}</h4>
+
+
+  <center>
+    <canvas id="combinedchart" width="2500" height="550"></canvas>
+    <table class="header">
+      <tr>
+        <td id='gains'>Total gains: {{ gains }}%</td>
+        <td id='trades'># of trades: {{ trades }}</td>
+        <td id='avgtime'>Avg time per trade: </td>
+        <td id='avgtrade'>Avg gain per trade: {{ avgtrade }}%</td>
+      </tr>
+
+    </table>
+
+    <canvas id="longchart" width="2500" height="525"></canvas>
+    <table class="longheader">
+      <tr>
+        <td id='gains'>Total gains: {{ long_gains }}%</td>
+        <td id='trades'># of trades: {{ long_num_trades }}</td>
+        <td id='avgtime'>Avg time per trade: </td>
+        <td id='avgtrade'>Avg gain per trade: {{ long_avgtrade }}%</td>
+      </tr>
+
+    </table>
+
+    <canvas id="shortchart" width="2500" height="525"></canvas>
+    <table class="shortheader">
+      <tr>
+        <td id='gains'>Total gains: {{ short_gains }}%</td>
+        <td id='trades'># of trades: {{ short_num_trades }}</td>
+        <td id='avgtime'>Avg time per trade: </td>
+        <td id='avgtrade'>Avg gain per trade: {{ short_avgtrade }}%</td>
+      </tr>
+
+    </table>
+
+    <script>
+
+      var ctx = document.getElementById('combinedchart').getContext('2d');
+      var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: 'line',
+
+          // The data for our dataset
+          data: {
+              labels: [
+                {% for item in total_labels %}
+                  "{{ item }}",
+                {% endfor %}
+              ],
+
+              datasets: [{
+                  label: 'Long/Short Trades',
+                  backgroundColor: 'rgba(169,187,200,0.2)',
+                  borderColor: 'rgba(169,187,200,1)',
+                  borderWidth: 1,
+                  data: [
+                    {% for item in total_trades %}
+                      "{{ item }}",
+                    {% endfor %}
+                  ]
+
+              }, {
+
+                  label: 'Long/Short Pnl',
+                  backgroundColor: 'rgba(65,105,225,0.2)',
+                  borderColor: 'rgba(65,105,225,1)',
+                  borderWidth: 1,
+                  data: [
+                    {% for item in total_pnl %}
+                      "{{ item }}",
+                    {% endfor %}
+                  ]
+              }]
+          },
+
+          // Configuration options go here
+          options: {
+
+          }
+      });
+
+      var ctx = document.getElementById('longchart').getContext('2d');
+      var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: 'line',
+
+          // The data for our dataset
+          data: {
+              labels: [
+                {% for item in long_labels %}
+                  "{{ item }}",
+                {% endfor %}
+              ],
+
+              datasets: [{
+                  label: 'Long Trades',
+                  backgroundColor: 'rgba(169,187,200,0.2)',
+                  borderColor: 'rgba(169,187,200,1)',
+                  borderWidth: 1,
+                  data: [
+                    {% for item in long_trades %}
+                      "{{ item }}",
+                    {% endfor %}
+                  ]
+
+              }, {
+
+                  label: 'Long Pnl',
+                  backgroundColor: 'rgba(0,180,0,0.2)',
+                  borderColor: 'rgba(0,180,0,1)',
+                  borderWidth: 1,
+                  data: [
+                    {% for item in long_pnl %}
+                      "{{ item }}",
+                    {% endfor %}
+                  ]
+              }]
+          },
+
+          // Configuration options go here
+          options: {
+
+          }
+      });
+
+
+      var ctx = document.getElementById('shortchart').getContext('2d');
+      var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: 'line',
+
+          // The data for our dataset
+          data: {
+              labels: [
+                {% for item in short_labels %}
+                  "{{ item }}",
+                {% endfor %}
+              ],
+
+              datasets: [{
+                  label: 'Short Trades',
+                  backgroundColor: 'rgba(169,187,200,0.2)',
+                  borderColor: 'rgba(169,187,200,1)',
+                  borderWidth: 1,
+                  // fill: false,
+                  data: [
+                    {% for item in short_trades %}
+                      "{{ item }}",
+                    {% endfor %}
+                  ]
+
+              }, {
+
+                  label: 'Short Pnl',
+                  backgroundColor: 'rgba(255,99,132,0.2)',
+                  borderColor: 'rgba(255,99,132,1)',
+                  borderWidth: 1,
+                  // fill: false,
+                  data: [
+                    {% for item in short_pnl %}
+                      "{{ item }}",
+                    {% endfor %}
+                  ]
+              }]
+          },
+
+          // Configuration options go here
+          options: {
+
+          }
+      });
+
+    </script>
+  </center>
+
+  <div class="footer">Created by: Aj Nicolas</div>
+</body>
+</html>

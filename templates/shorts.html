@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ title }}</title>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+    <h2>Backtesting Results</h2>
+
+    <table class="header">
+      <tr>
+        <td id='trades'>Total trades: {{ trades }}</td>
+        <td id='gains'>Total gains: {{ gains }}%</td>
+        <td id='avgtime'>Avg time per trade: </td>
+        <td id='avgtrade'>Avg gain per trade: {{ avgtrade }}%</td>
+      </tr>
+    </table>
+
+  <center>
+
+    <canvas id="shortchart" width="2500" height="500"></canvas>
+    <canvas id="winloss" width="1500" height="500"></canvas>
+    <script>
+
+
+      var ctx = document.getElementById('shortchart').getContext('2d');
+      var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: 'line',
+
+          // The data for our dataset
+          data: {
+              labels: [
+                {% for item in short_labels %}
+                  "{{ item }}",
+                {% endfor %}
+              ],
+
+              datasets: [{
+                  label: 'Short Trades',
+                  backgroundColor: 'rgba(169,187,200,0.2)',
+                  borderColor: 'rgba(169,187,200,1)',
+                  borderWidth: 1,
+                  // fill: false,
+                  data: [
+                    {% for item in short_trades %}
+                      "{{ item }}",
+                    {% endfor %}
+                  ]
+
+              }, {
+
+                  label: 'Short Pnl',
+                  backgroundColor: 'rgba(255,99,132,0.2)',
+                  borderColor: 'rgba(255,99,132,1)',
+                  borderWidth: 1,
+                  // fill: false,
+                  data: [
+                    {% for item in short_pnl %}
+                      "{{ item }}",
+                    {% endfor %}
+                  ]
+              }]
+          },
+
+          // Configuration options go here
+          options: {}
+      });
+
+
+
+     var ctx = document.getElementById('winloss').getContext('2d');
+     var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: 'pie',
+
+          // The data for our dataset
+          data: {
+              labels: ["Win", "Loss"],
+
+              datasets: [{
+                  label: 'win/loss',
+                  backgroundColor: ["#7aa5da", "#aaaaaa"],
+                  // borderColor: ["#1a1410", "#1a1410"],
+                  // fill: false,
+                  data: [
+                    {% for item in winloss %}
+                      "{{ item }}",
+                    {% endfor %}
+                  ]
+              }]
+          },
+
+          // Configuration options go here
+          options: {
+            title: {
+              display: true,
+              text: 'Shorts Win/Loss'
+            }
+          }
+      });
+
+
+
+    </script>
+  </center>
+  <div class="footer">Created by: Aj Nicolas</div>
+</body>
+</html>

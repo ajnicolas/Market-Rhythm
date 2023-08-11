@@ -1,0 +1,64 @@
+body{
+	background: white;
+	color: black;
+}
+
+h2{
+	text-align: center;
+	font-weight: normal;
+	font-size: 20px;
+	font-family: Courier New;
+}
+
+h4{
+	padding-left: 25px;
+	font-weight: normal;
+	font-size: 15px;
+	font-family: Courier New;
+}
+
+.header{
+	margin:auto;
+}
+
+.longheader{
+	margin:auto;
+}
+
+.shortheader{
+	margin:auto;
+}
+
+td{
+	color: black;
+	height: 50px;
+	width: 350px;
+	text-align: center;
+	font-family: Courier New;
+	font-size: 95%;
+}
+
+#combinedchart{
+/*	padding-top: 5px;
+*/
+}
+
+#longchart{
+	padding-top: 10px;
+}
+
+#shortchart{
+	padding-top: 10px;
+}
+
+/*#winloss{
+	position: relative;
+	left: -450px;
+}*/
+
+.footer{
+	padding-top: 25px;
+	position: relative;
+	bottom: 5px;
+	font-family: Courier New;
+}
