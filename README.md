@@ -22,6 +22,10 @@ pip install -r requirements.txt
 With the libraries installed needed to run, we are set up. 
 Will update the rest, as I need to implement more to make it more. For right now, you can download crypto data, create strategies, and backtest them by running in app.py (python3 app.py)
 
+<img width="1439" alt="marketrhythm1" src="https://github.com/ajnicolas/Market-Rhythm/assets/22848229/6d40c08f-d849-4d57-afe3-f772c505d92a">
+<img width="1439" alt="marketrhythm5" src="https://github.com/ajnicolas/Market-Rhythm/assets/22848229/e33b02d5-6d6d-485f-97f3-50c81e22de0d">
+<img width="1440" alt="marketrhythm6" src="https://github.com/ajnicolas/Market-Rhythm/assets/22848229/49f196d0-0c36-4e54-bb74-a4812a96419f">
+
 # Future implementations
 - Add implementation for AI models
 - More exchcange data for different pairs
